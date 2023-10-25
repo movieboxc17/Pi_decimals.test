@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.1/brython.js"></script>
+    <title>Python Code Executor</title>
 </head>
 <body>
-    <h1>Python Code Execution</h1>
+    <h1>Python Code Executor</h1>
+    <textarea id="code" rows="10" cols="40"></textarea><br>
+    <button id="execute">Execute</button><br>
+    <h2>Output:</h2>
     <pre id="output"></pre>
+    <script>
+        document.getElementById("execute").addEventListener("click", function () {
+            var code = document.getElementById("code").value;
+            var data = { code: code };
 
-    <script type="text/python">
-        from browser import document
-
-        def pi_bbp(n):
-            import decimal
-            decimal.getcontext().prec = n + 2
-            pi = decimal.Decimal(0)
-            for k in range(n):
-                pi += (decimal.Decimal(1) / 16 ** k) * (
-                    (decimal.Decimal(4) / (8 * k + 1)) -
-                    (decimal.Decimal(2) / (8 * k + 4)) -
-                    (decimal.Decimal(1) / (8 * k + 5)) -
-                    (decimal.Decimal(1) / (8 * k + 6))
-                )
-            return str(pi)[:-2]
-
-        n_decimals = 10000
-        pi_digits = pi_bbp(n_decimals)
-        document['output'].text = pi_digits
+            fetch("/execute", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("output").textContent = data;
+            });
+        });
     </script>
 </body>
 </html>
