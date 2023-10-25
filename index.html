@@ -5,10 +5,10 @@
 </head>
 <body>
     <h1>Python Code Executor</h1>
-    <textarea id="code" rows="10" cols="40"></textarea><br>
-    <button id="execute">Execute</button><br>
+    <textarea id="code" rows="20" cols="80"></textarea><br>
+    <button id="execute">Execute Python Code</button><br>
     <h2>Output:</h2>
-    <pre id="output"></pre>
+    <pre id="output" style="white-space: pre-wrap;"></pre>
     <script>
         document.getElementById("execute").addEventListener("click", function () {
             var code = document.getElementById("code").value;
