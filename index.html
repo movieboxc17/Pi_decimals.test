@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.1/brython.js"></script>
+</head>
+<body>
+    <h1>Python Code Execution</h1>
+    <pre id="output"></pre>
+
+    <script type="text/python">
+        from browser import document
+
+        def pi_bbp(n):
+            import decimal
+            decimal.getcontext().prec = n + 2
+            pi = decimal.Decimal(0)
+            for k in range(n):
+                pi += (decimal.Decimal(1) / 16 ** k) * (
+                    (decimal.Decimal(4) / (8 * k + 1)) -
+                    (decimal.Decimal(2) / (8 * k + 4)) -
+                    (decimal.Decimal(1) / (8 * k + 5)) -
+                    (decimal.Decimal(1) / (8 * k + 6))
+                )
+            return str(pi)[:-2]
+
+        n_decimals = 10000
+        pi_digits = pi_bbp(n_decimals)
+        document['output'].text = pi_digits
+    </script>
+</body>
+</html>
