@@ -1,31 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Python Code Executor</title>
+    <title>View PDFs</title>
 </head>
 <body>
-    <h1>Python Code Executor</h1>
-    <textarea id="code" rows="20" cols="80"></textarea><br>
-    <button id="execute">Execute Python Code</button><br>
-    <h2>Output:</h2>
-    <pre id="output" style="white-space: pre-wrap;"></pre>
-    <script>
-        document.getElementById("execute").addEventListener("click", function () {
-            var code = document.getElementById("code").value;
-            var data = { code: code };
-
-            fetch("/execute", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("output").textContent = data;
-            });
-        });
-    </script>
+    <h1>Uploaded PDFs:</h1>
+    <ul>
+        <li><a href="uploaded-pdfs/pdf-file1.pdf" target="_blank">PDF File 1</a></li>
+        <li><a href="uploaded-pdfs/pdf-file2.pdf" target="_blank">PDF File 2</a></li>
+        <!-- Add more links for other uploaded PDFs as needed -->
+    </ul>
 </body>
 </html>
